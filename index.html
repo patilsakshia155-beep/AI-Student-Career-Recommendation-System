@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Student Career Recommendation System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<main class="container">
+
+    <header class="hero">
+        <div class="icon">🎓</div>
+        <p>FOUNDATION OF ARTIFICIAL INTELLIGENCE</p>
+        <h1>AI Student Career<br>
+        <span>Recommendation System</span></h1>
+        <p class="subtitle">
+            Discover career paths using CSP, Forward Chaining
+            and Backward Chaining.
+        </p>
+        <div class="tags">
+            <span>Python + Flask</span>
+            <span>Constraint Satisfaction</span>
+            <span>Rule-based AI</span>
+        </div>
+    </header>
+
+    <!-- Student Profile -->
+    <section class="panel">
+
+        <h2>01. Build Your Student Profile</h2>
+        <p>Select your interests and skills.</p>
+
+        <div id="facts" class="facts-grid">
+            {% for fact in facts %}
+            <label class="fact">
+                <input type="checkbox" value="{{ fact }}">
+                <span>{{ fact.replace('_', ' ') }}</span>
+            </label>
+            {% endfor %}
+        </div>
+
+        <label for="customFacts">Add Other Facts</label>
+
+        <input
+            id="customFacts"
+            class="text-input"
+            type="text"
+            placeholder="Enter facts separated by commas"
+        >
+
+        <div class="actions">
+            <button id="recommendBtn" class="button primary">
+                Recommend Careers
+            </button>
+
+            <button id="clearBtn" class="button secondary">
+                Clear
+            </button>
+        </div>
+
+        <div class="quick-tests">
+            <span>Try Examples:</span>
+
+            <button class="test-button"
+                data-test="interest_ai,strong_math,programming">
+                AI / ML
+            </button>
+
+            <button class="test-button"
+                data-test="interest_data,strong_math,analytical">
+                Data Analyst
+            </button>
+
+            <button class="test-button"
+                data-test="programming,problem_solving,interest_software">
+                Software
+            </button>
+
+            <button class="test-button"
+                data-test="networking,security_interest,problem_solving">
+                Cybersecurity
+            </button>
+        </div>
+
+    </section>
+
+    <!-- Recommendations -->
+    <section id="resultsPanel" class="panel hidden">
+
+        <h2>02. Career Recommendations</h2>
+
+        <p id="resultMessage"></p>
+
+        <div id="recommendations"></div>
+
+    </section>
+
+    <!-- Forward Chaining -->
+    <section id="tracePanel" class="panel hidden">
+
+        <h2>03. Forward Chaining</h2>
+
+        <p>Rules activated by student facts.</p>
+
+        <ol id="traceList"></ol>
+
+    </section>
+
+    <!-- Backward Chaining -->
+    <section class="panel">
+
+        <h2>04. Backward Chaining Verification</h2>
+
+        <p>Select a career to verify.</p>
+
+        <div class="verify-row">
+
+            <select id="careerGoal" class="text-input">
+                {% for career in careers %}
+                <option value="{{ career }}">
+                    {{ career }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <button id="verifyBtn" class="button primary">
+                Verify Goal
+            </button>
+
+        </div>
+
+        <div id="verification"></div>
+
+    </section>
+
+    <!-- Knowledge Base -->
+    <section class="panel">
+
+        <h2>05. Knowledge Base</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>IF Conditions</th>
+                    <th>THEN Career</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>interest_ai + strong_math + programming</td>
+                    <td>AI/ML Engineer</td>
+                </tr>
+
+                <tr>
+                    <td>interest_data + strong_math + analytical</td>
+                    <td>Data Analyst</td>
+                </tr>
+
+                <tr>
+                    <td>programming + problem_solving + interest_software</td>
+                    <td>Software Developer</td>
+                </tr>
+
+                <tr>
+                    <td>networking + security_interest + problem_solving</td>
+                    <td>Cybersecurity Analyst</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>
+            CSP variables include Interest, Strong Subject,
+            Skills and Career.
+        </p>
+
+    </section>
+
+    <footer>
+        AI Student Career Recommendation System
+        <br>
+        Educational Project | Foundation of AI
+    </footer>
+
+</main>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
